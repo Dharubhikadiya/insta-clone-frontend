@@ -76,7 +76,7 @@ const PostDetail = ({ items, toggleDetails }) => {
                   <p className="text-sm">{items.body}</p>
                 </div>
               </div>
-              {items.comments.map((comment) => {
+              {items.comments?.map((comment) => {
                 return (
                   <div>
                     <span className="text-md font-semibold flex">

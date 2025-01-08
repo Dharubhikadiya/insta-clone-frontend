@@ -170,7 +170,6 @@ const UserProfile = () => {
             return (
               <>
                 <img
-                  //   onClick={() => toggleDetails(pic)}
                   key={pic?._id}
                   src={pic?.photo}
                   className="w-full h-40 object-cover"

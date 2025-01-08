@@ -76,7 +76,7 @@ const Profile = () => {
         <header className="flex items-center justify-between p-4 border-b border-gray-200">
           <div className="flex items-center gap-2">
             <Link href="/" className="text-xl font-semibold">
-              {JSON.parse(localStorage.getItem("user")).name}
+              {JSON.parse(localStorage.getItem("user"))?.name}
             </Link>
           </div>
           <div className="flex items-center gap-4">
@@ -91,7 +91,7 @@ const Profile = () => {
             <div className="mt-2">
               <img
                 onClick={changeprofile}
-                src={user.photo ? user.photo : piclink}
+                src={user?.photo ? user?.photo : piclink}
                 alt="Profile"
                 className="w-[100px] h-[100px] object-cover overflow-hidden rounded-full"
               />
@@ -103,13 +103,13 @@ const Profile = () => {
               </div>
               <div>
                 <div className="font-semibold">
-                  {user.followers ? user.followers.length : 0}
+                  {user?.followers ? user?.followers.length : 0}
                 </div>
                 <div className="text-sm text-gray-600">followers</div>
               </div>
               <div>
                 <div className="font-semibold">
-                  {user.following ? user.following.length : 0}
+                  {user?.following ? user?.following.length : 0}
                 </div>
                 <div className="text-sm text-gray-600">following</div>
               </div>

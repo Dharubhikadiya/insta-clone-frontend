@@ -36,7 +36,7 @@ const MyFollowingPost = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        const newData = data.map((posts) => {
+        const newData = data?.map((posts) => {
           if (posts._id === result._id) {
             return result;
           } else {
@@ -58,7 +58,7 @@ const MyFollowingPost = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        const newData = data.map((posts) => {
+        const newData = data?.map((posts) => {
           if (posts._id === result._id) {
             return result;
           } else {
@@ -84,7 +84,7 @@ const MyFollowingPost = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        const newData = data.map((posts) => {
+        const newData = data?.map((posts) => {
           if (posts._id === result._id) {
             return result;
           } else {
@@ -118,131 +118,135 @@ const MyFollowingPost = () => {
       <div className="flex bg-gray-100 flex-col items-center justify-center p-4 py-2">
         {data?.map((posts) => {
           return (
-            <div
-              key={posts._id}
-              className="bg-white max-w-[460px] w-full rounded shadow-inner m-1"
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between p-3">
-                <div className="flex items-center gap-3">
-                  {/* Profile Picture */}
-                  <div className="w-8 h-8 rounded-full overflow-hidden mt-2">
-                    <img
-                      src={
-                        posts.postedBy.photo ? posts.postedBy.photo : piclink
-                      }
-                      alt="Profile"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  {/* Username and Location */}
-                  <div>
-                    <Link
-                      to={`/userprofile/${posts.postedBy._id}`}
-                      className="text-sm font-semibold"
-                    >
-                      {posts.postedBy.name}
-                    </Link>
-                    <div className="text-xs text-gray-500 text-left">Surat</div>
-                  </div>
-                </div>
-                {/* More Options button */}
-                <button className="p-2 text-2xl">
-                  <HiOutlineDotsHorizontal />
-                </button>
-              </div>
-
-              {/* Main Image */}
-              <div className="relative w-full aspect-[3/2]">
-                <img
-                  src={posts.photo}
-                  alt="A person wearing a pink blouse and floral saree with braided hairstyle"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              {/* Action buttons */}
-              <div className="p-3 my-2">
-                <div className="flex justify-between items-center">
-                  <div className="flex gap-5 items-center justify-center">
-                    {/* Like button */}
-                    {posts.likes.includes(
-                      JSON.parse(localStorage.getItem("user"))._id
-                    ) ? (
-                      <button
-                        onClick={() => unlikepost(posts._id)}
-                        className="text-2xl text-red-500"
+            <>
+              <div
+                key={posts._id}
+                className="bg-white max-w-[460px] w-full rounded shadow-inner m-1"
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between p-3">
+                  <div className="flex items-center gap-3">
+                    {/* Profile Picture */}
+                    <div className="w-8 h-8 rounded-full overflow-hidden mt-2">
+                      <img
+                        src={
+                          posts.postedBy.photo ? posts.postedBy.photo : piclink
+                        }
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    {/* Username and Location */}
+                    <div>
+                      <Link
+                        to={`/userprofile/${posts.postedBy._id}`}
+                        className="text-sm font-semibold"
                       >
-                        <FaHeart />
-                      </button>
-                    ) : (
+                        {posts.postedBy.name}
+                      </Link>
+                      <div className="text-xs text-gray-500 text-left">
+                        Surat
+                      </div>
+                    </div>
+                  </div>
+                  {/* More Options button */}
+                  <button className="p-2 text-2xl">
+                    <HiOutlineDotsHorizontal />
+                  </button>
+                </div>
+
+                {/* Main Image */}
+                <div className="relative w-full aspect-[3/2]">
+                  <img
+                    src={posts.photo}
+                    alt="A person wearing a pink blouse and floral saree with braided hairstyle"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Action buttons */}
+                <div className="p-3 my-2">
+                  <div className="flex justify-between items-center">
+                    <div className="flex gap-5 items-center justify-center">
+                      {/* Like button */}
+                      {posts?.likes.includes(
+                        JSON.parse(localStorage.getItem("user"))?._id
+                      ) ? (
+                        <button
+                          onClick={() => unlikepost(posts._id)}
+                          className="text-2xl text-red-500"
+                        >
+                          <FaHeart />
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => likepost(posts._id)}
+                          className="text-2xl text-dark"
+                        >
+                          <FaRegHeart />
+                        </button>
+                      )}
+
+                      {/* Comment button */}
                       <button
-                        onClick={() => likepost(posts._id)}
+                        onClick={() => togglecomment(posts)}
                         className="text-2xl text-dark"
                       >
-                        <FaRegHeart />
+                        <FaRegComment />
                       </button>
-                    )}
-
-                    {/* Comment button */}
-                    <button
-                      onClick={() => togglecomment(posts)}
-                      className="text-2xl text-dark"
-                    >
-                      <FaRegComment />
-                    </button>
-                    {/* Share button */}
-                    <button className="text-2xl text-dark">
-                      <LuSend />
+                      {/* Share button */}
+                      <button className="text-2xl text-dark">
+                        <LuSend />
+                      </button>
+                    </div>
+                    {/* Save button */}
+                    <button className="text-xl text-dark">
+                      <BsSave />
                     </button>
                   </div>
-                  {/* Save button */}
-                  <button className="text-xl text-dark">
-                    <BsSave />
-                  </button>
-                </div>
 
-                {/* Likes Count */}
-                <div className="mt-3 pe-2">
-                  <p className="font-semibold text-sm text-left">
-                    {posts.likes.length} Likes
-                  </p>
-                </div>
+                  {/* Likes Count */}
+                  <div className="mt-3 pe-2">
+                    <p className="font-semibold text-sm text-left">
+                      {posts.likes.length} Likes
+                    </p>
+                  </div>
 
-                {/* Caption */}
-                <div className="mt-1">
-                  <p className="text-sm p-0 m-0 text-left">{posts.body}</p>
-                </div>
+                  {/* Caption */}
+                  <div className="mt-1">
+                    <p className="text-sm p-0 m-0 text-left">{posts.body}</p>
+                  </div>
 
-                {/* All Comment */}
-                <div className="mt-1">
-                  <p
-                    onClick={() => togglecomment(posts)}
-                    className="text-md font-semibold p-0 m-0 text-left cursor-pointer"
-                  >
-                    View all comments
-                  </p>
-                </div>
+                  {/* All Comment */}
+                  <div className="mt-1">
+                    <p
+                      onClick={() => togglecomment(posts)}
+                      className="text-md font-semibold p-0 m-0 text-left cursor-pointer"
+                    >
+                      View all comments
+                    </p>
+                  </div>
 
-                {/* comment section */}
-                <div className="mt-4 mb-2 relative">
-                  <div className="absolute top-1.5 left-2 text-xl">☺️</div>
-                  <input
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    type="text"
-                    placeholder="Add a comment"
-                    className="border w-full p-2 rounded-xl ps-12"
-                  ></input>
-                  <button
-                    onClick={() => makecomment(comment, posts._id)}
-                    className="absolute right-3 top-2 font-semibold"
-                  >
-                    Post
-                  </button>
+                  {/* comment section */}
+                  <div className="mt-4 mb-2 relative">
+                    <div className="absolute top-1.5 left-2 text-xl">☺️</div>
+                    <input
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                      type="text"
+                      placeholder="Add a comment"
+                      className="border w-full p-2 rounded-xl ps-12"
+                    ></input>
+                    <button
+                      onClick={() => makecomment(comment, posts._id)}
+                      className="absolute right-3 top-2 font-semibold"
+                    >
+                      Post
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </>
           );
         })}
       </div>
@@ -288,7 +292,7 @@ const MyFollowingPost = () => {
                     <p className="text-sm">{items.body}</p>
                   </div>
                 </div>
-                {items.comments.map((comment) => {
+                {items.comments?.map((comment) => {
                   return (
                     <div>
                       <span className="text-md font-semibold flex">

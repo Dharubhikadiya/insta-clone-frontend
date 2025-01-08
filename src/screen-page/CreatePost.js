@@ -8,9 +8,12 @@ import { LoginContext } from "../context/Logincontext";
 import { AiOutlinePlus } from "react-icons/ai";
 
 const CreatePost = () => {
+  var piclink = "https://cdn-icons-png.flaticon.com/128/847/847969.png";
   const [body, setBody] = useState("");
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
+  const [user, setUser] = useState("");
+  const [pic, setPic] = useState([]);
 
   const { setmodalOpen } = useContext(LoginContext);
 
@@ -21,6 +24,7 @@ const CreatePost = () => {
 
   const postDetails = () => {
     const data = new FormData();
+
     data.append("file", image);
     data.append("upload_preset", "insta-clone");
     data.append("cloud_name", "companycloude");
@@ -71,6 +75,28 @@ const CreatePost = () => {
     }
   }, [url, body, navigate]);
 
+  useEffect(() => {
+    fetch(
+      `${process.env.REACT_APP_BASE_API}/user/${
+        JSON.parse(localStorage.getItem("user"))._id
+      }`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "bearer " + localStorage.getItem("jwt"),
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+
+        setPic(result.posts);
+        setUser(result.user);
+      });
+  }, []);
+
   return (
     <div
       className="
@@ -108,12 +134,19 @@ const CreatePost = () => {
         </div>
         <div>
           <div className="flex items-center gap-3 p-4">
-            <img
+            {/* <img
               src="https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww"
               alt="Profile"
               className="w-[40px] h-[40px] object-cover overflow-hidden rounded-full"
+            /> */}
+            <img
+              src={user?.photo ? user?.photo : piclink}
+              alt="Profile"
+              className="w-[40px] h-[40px] object-cover overflow-hidden rounded-full"
             />
-            <span className="font-semibold">Ramesh</span>
+            <span className="font-semibold">
+              {JSON.parse(localStorage.getItem("user"))?.name}
+            </span>
           </div>
         </div>
         <div>

@@ -50,7 +50,7 @@ const Home = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        const newData = data.map((posts) => {
+        const newData = data?.map((posts) => {
           if (posts._id === result._id) {
             return result;
           } else {
@@ -72,7 +72,7 @@ const Home = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        const newData = data.map((posts) => {
+        const newData = data?.map((posts) => {
           if (posts._id === result._id) {
             return result;
           } else {
@@ -98,7 +98,7 @@ const Home = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        const newData = data.map((posts) => {
+        const newData = data?.map((posts) => {
           if (posts._id === result._id) {
             return result;
           } else {
@@ -357,7 +357,7 @@ const Home = () => {
                     <p className="text-sm">{items.body}</p>
                   </div>
                 </div>
-                {items.comments.map((comment) => {
+                {items.comments?.map((comment) => {
                   return (
                     <div>
                       <span className="text-md font-semibold flex">
