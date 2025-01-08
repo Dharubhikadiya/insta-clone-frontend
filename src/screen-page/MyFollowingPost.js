@@ -32,6 +32,7 @@ const MyFollowingPost = () => {
         "Content-Type": "application/json",
         Authorization: "bearer " + localStorage.getItem("jwt"),
       },
+      credentials: "include",
       body: JSON.stringify({ postId: id }),
     })
       .then((response) => response.json())
@@ -54,6 +55,7 @@ const MyFollowingPost = () => {
         "Content-Type": "application/json",
         Authorization: "bearer " + localStorage.getItem("jwt"),
       },
+      credentials: "include",
       body: JSON.stringify({ postId: id }),
     })
       .then((response) => response.json())
@@ -77,6 +79,7 @@ const MyFollowingPost = () => {
         "Content-Type": "application/json",
         Authorization: "bearer " + localStorage.getItem("jwt"),
       },
+      credentials: "include",
       body: JSON.stringify({
         text: text,
         postId: id,
@@ -107,6 +110,7 @@ const MyFollowingPost = () => {
       headers: {
         Authorization: "bearer " + localStorage.getItem("jwt"),
       },
+      credentials: "include",
     })
       .then((res) => res.json())
       .then((result) => setData(result))

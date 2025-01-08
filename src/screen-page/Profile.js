@@ -55,6 +55,7 @@ const Profile = () => {
           "Content-Type": "application/json",
           Authorization: "bearer " + localStorage.getItem("jwt"),
         },
+        credentials: "include",
       }
     )
       .then((res) => res.json())

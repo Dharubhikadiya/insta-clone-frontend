@@ -46,6 +46,7 @@ const Home = () => {
         "Content-Type": "application/json",
         Authorization: "bearer " + localStorage.getItem("jwt"),
       },
+      credentials: "include",
       body: JSON.stringify({ postId: id }),
     })
       .then((response) => response.json())
@@ -68,6 +69,7 @@ const Home = () => {
         "Content-Type": "application/json",
         Authorization: "bearer " + localStorage.getItem("jwt"),
       },
+      credentials: "include",
       body: JSON.stringify({ postId: id }),
     })
       .then((response) => response.json())
@@ -91,6 +93,7 @@ const Home = () => {
         "Content-Type": "application/json",
         Authorization: "bearer " + localStorage.getItem("jwt"),
       },
+      credentials: "include",
       body: JSON.stringify({
         text: text,
         postId: id,
@@ -119,6 +122,7 @@ const Home = () => {
         headers: {
           Authorization: "bearer " + localStorage.getItem("jwt"),
         },
+        credentials: "include",
       }
     )
       .then((res) => res.json())

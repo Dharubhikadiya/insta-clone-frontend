@@ -17,6 +17,7 @@ const PostDetail = ({ items, toggleDetails }) => {
           "Content-Type": "application/json",
           Authorization: "bearer " + localStorage.getItem("jwt"),
         },
+        credentials: "include",
       })
         .then((response) => response.json())
         .then((result) => {

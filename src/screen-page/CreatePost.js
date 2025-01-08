@@ -55,6 +55,7 @@ const CreatePost = () => {
           "Content-Type": "application/json",
           Authorization: "bearer " + localStorage.getItem("jwt"),
         },
+        credentials: "include",
         body: JSON.stringify({
           body,
           pic: url,
@@ -86,6 +87,7 @@ const CreatePost = () => {
           "Content-Type": "application/json",
           Authorization: "bearer " + localStorage.getItem("jwt"),
         },
+        credentials: "include",
       }
     )
       .then((res) => res.json())

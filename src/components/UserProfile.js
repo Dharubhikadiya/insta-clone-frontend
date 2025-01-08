@@ -32,6 +32,7 @@ const UserProfile = () => {
         "Content-Type": "application/json",
         Authorization: "bearer " + localStorage.getItem("jwt"),
       },
+      credentials: "include",
       body: JSON.stringify({
         followId: userId,
       }),
@@ -50,6 +51,7 @@ const UserProfile = () => {
         "Content-Type": "application/json",
         Authorization: "bearer " + localStorage.getItem("jwt"),
       },
+      credentials: "include",
       body: JSON.stringify({
         followId: userId,
       }),
@@ -68,6 +70,7 @@ const UserProfile = () => {
         "Content-Type": "application/json",
         Authorization: "bearer " + localStorage.getItem("jwt"),
       },
+      credentials: "include",
     })
       .then((res) => res.json())
       .then((result) => {

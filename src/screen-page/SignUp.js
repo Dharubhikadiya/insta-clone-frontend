@@ -60,6 +60,7 @@ const SignUp = () => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         name: name,
         email: email,
@@ -88,6 +89,7 @@ const SignUp = () => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         name: jwtDetail.name,
         email: jwtDetail.email,

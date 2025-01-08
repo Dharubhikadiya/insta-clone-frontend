@@ -30,6 +30,7 @@ const ProfilePic = ({ changeprofile }) => {
         "Content-Type": "application/json",
         Authorization: "bearer " + localStorage.getItem("jwt"),
       },
+      credentials: "include",
       body: JSON.stringify({
         pic: url,
       }),
