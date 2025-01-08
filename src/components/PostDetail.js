@@ -1,7 +1,5 @@
 import React from "react";
-import { LuMessageCircle } from "react-icons/lu";
 import { CgClose } from "react-icons/cg";
-import { FaSmile } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -13,7 +11,7 @@ const PostDetail = ({ items, toggleDetails }) => {
 
   const removepost = (postId) => {
     if (window.confirm("Are you sure you want to delete this post?")) {
-      fetch(`http://localhost:5000/deletepost/${postId}`, {
+      fetch(`${process.env.REACT_APP_BASE_API}/deletepost/${postId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -22,7 +20,6 @@ const PostDetail = ({ items, toggleDetails }) => {
       })
         .then((response) => response.json())
         .then((result) => {
-          console.log(result);
           notifyB(result.message);
           toggleDetails();
           navigate("/");
@@ -32,7 +29,7 @@ const PostDetail = ({ items, toggleDetails }) => {
 
   return (
     <div>
-      <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-4 z-10">
         <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row p-6 gap-8 max-w-[800px] w-full">
           {/* Image Section */}
           <div className="w-full md:w-1/2">
@@ -95,7 +92,7 @@ const PostDetail = ({ items, toggleDetails }) => {
 
             {/* Emoji Bar and Comment Input */}
             <div className="border-t bg-white fixed bottom-0 left-0 right-0 md:relative">
-              <div className="flex gap-2 px-4 justify-between">
+              <div className="flex gap-2 px-4 justify-between pt-2">
                 <button className="hover:bg-gray-100 p-2 rounded-full">
                   <span className="text-xl">❤️</span>
                 </button>
@@ -110,21 +107,6 @@ const PostDetail = ({ items, toggleDetails }) => {
                 </button>
                 <button className="hover:bg-gray-100 p-2 rounded-full">
                   <span className="text-xl">🤣</span>
-                </button>
-              </div>
-              <div className="flex items-center gap-2 px-4 pb-3">
-                <div className="flex-1 flex items-center gap-2 border rounded-full px-3 py-1.5">
-                  <input
-                    type="text"
-                    placeholder="Add a comment..."
-                    className="flex-1 text-sm border-none focus:outline-none"
-                  />
-                  <button>
-                    <FaSmile className="w-5 h-5 text-gray-500" />
-                  </button>
-                </div>
-                <button>
-                  <LuMessageCircle className="w-5 h-5" />
                 </button>
               </div>
             </div>

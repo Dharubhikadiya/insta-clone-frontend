@@ -55,7 +55,7 @@ const SignUp = () => {
       return;
     }
 
-    fetch("http://localhost:5000/signup", {
+    fetch(`${process.env.REACT_APP_BASE_API}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +83,7 @@ const SignUp = () => {
     console.log(credentialResponse);
     const jwtDetail = jwtDecode(credentialResponse.credential);
     console.log(jwtDetail);
-    fetch("http://localhost:5000/googleLogin", {
+    fetch(`${process.env.REACT_APP_BASE_API}/googleLogin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

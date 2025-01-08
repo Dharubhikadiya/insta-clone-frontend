@@ -46,7 +46,7 @@ const Profile = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/user/${
+      `${process.env.REACT_APP_BASE_API}/user/${
         JSON.parse(localStorage.getItem("user"))._id
       }`,
       {
@@ -142,19 +142,16 @@ const Profile = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-3 gap-1 bg-gray-100 ">
-          {pic?.map((pic) => {
-            return (
-              <>
-                <img
-                  onClick={() => toggleDetails(pic)}
-                  key={pic._id}
-                  src={pic.photo}
-                  className="w-full h-40 object-cover"
-                />
-              </>
-            );
-          })}
+        <div className="grid grid-cols-3 gap-1 bg-gray-100">
+          {pic?.map((pic) => (
+            <img
+              key={pic._id} // Add the unique key here
+              onClick={() => toggleDetails(pic)}
+              src={pic.photo}
+              alt={pic.name}
+              className="w-full h-40 object-cover"
+            />
+          ))}
         </div>
 
         {/* Bottom Navigation */}

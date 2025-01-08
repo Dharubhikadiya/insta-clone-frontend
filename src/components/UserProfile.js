@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+import { FaRegCircleUser } from "react-icons/fa6";
 import {
   IoHomeOutline,
   IoSearchOutline,
@@ -10,7 +12,9 @@ import {
   IoEllipsisVerticalOutline,
   // IoPersonOutline,
 } from "react-icons/io5";
+import { LuLogOut } from "react-icons/lu";
 import { Link, useParams } from "react-router-dom";
+import { LoginContext } from "../context/Logincontext";
 
 const UserProfile = () => {
   var piclink = "https://cdn-icons-png.flaticon.com/128/847/847969.png";
@@ -19,8 +23,10 @@ const UserProfile = () => {
   const [user, setUser] = useState("");
   const [posts, setPosts] = useState([]);
 
+  const { setmodalOpen } = useContext(LoginContext);
+
   const followUser = (userId) => {
-    fetch("http://localhost:5000/follow", {
+    fetch(`${process.env.REACT_APP_BASE_API}/follow`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +44,7 @@ const UserProfile = () => {
   };
 
   const unfollowUser = (userId) => {
-    fetch("http://localhost:5000/unfollow", {
+    fetch(`${process.env.REACT_APP_BASE_API}/unfollow`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +62,7 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/user/${userid}`, {
+    fetch(`${process.env.REACT_APP_BASE_API}/user/${userid}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -176,17 +182,17 @@ const UserProfile = () => {
 
         {/* Bottom Navigation */}
         <nav className="sticky bottom-0 left-0 right-0 flex justify-between p-4 bg-white border-t border-gray-200">
-          <IoHomeOutline className="h-6 w-6" />
+          <Link to="/">
+            <IoHomeOutline className="h-6 w-6" />
+          </Link>
           <IoSearchOutline className="h-6 w-6" />
-          <IoAddOutline className="h-6 w-6" />
-          <IoVideocamOutline className="h-6 w-6" />
-          <image
-            src="/placeholder.svg?height=24&width=24"
-            alt="Profile"
-            width={24}
-            height={24}
-            className="rounded-full"
-          />
+          <Link to="/createpost">
+            <AiOutlinePlus className="h-6 w-6" />
+          </Link>
+          <LuLogOut className="h-6 w-6" onClick={() => setmodalOpen(true)} />
+          <Link to="/profile">
+            <FaRegCircleUser className="h-6 w-6" />
+          </Link>
         </nav>
       </div>
       {/* {show && <PostDetail items={posts} toggleDetails={toggleDetails} />} */}
